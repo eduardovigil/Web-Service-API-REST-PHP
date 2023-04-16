@@ -29,22 +29,24 @@ $data = json_decode($response);
 </tr>
 </thead>
 <tbody class="p-2 bd-highlight">
-<?php 
-foreach ($data as $registro) {
-    echo '<tr>';
-    echo '<td>' . $registro->id . '</td>';
-    echo '<td>' . $registro->nombre . '</td>';
-    echo '<td>' . $registro->apellido . '</td>';
-    echo '<td>' . $registro->edad . '</td>';
-    echo '<td> $ ' . $registro->salario . '</td>';
-    echo '<td> <a href="update.php"><button type="button" class="btn btn-success">Editar</button></a> <button type="button" class="btn btn-danger">Eliminar</button></td>';
-    echo '</tr>';
-}
-?>
+<?php foreach ($data as $dato): ?>
+      <tr>
+        <td><?php echo $dato->id; ?></td>
+        <td><?php echo $dato->nombre; ?></td>
+        <td><?php echo $dato->apellido; ?></td>
+        <td><?php echo $dato->edad; ?></td>
+        <td><?php echo $dato->salario; ?></td>
+        <td>
+          <form action="delete.php" method="POST">
+            <input type="hidden" name="id" value="<?php echo $dato->id; ?>">
+            <button type="submit" class="btn btn-danger">Eliminar</button>
+          </form>
+        </td>
+      </tr>
+    <?php endforeach; ?>
 </tbody>
 </table>
 <a href="create.php"><input type="button" value="Crear usuario" class="btn btn-primary" style="margin: auto; display: flex; margin-top: 10px;"></a>
 <a href="update.php"><button type="button" class="btn btn-success" style="margin: auto; display: flex; margin-right: 550px; margin-top: -37px;">Editar</button></a>
-<a href="delete.php"><button type="button" class="btn btn-danger" style="margin: auto; display: flex; margin-right: 750px; margin-top: -37px;">Eliminar</button></a>
 </body>
 </html>
